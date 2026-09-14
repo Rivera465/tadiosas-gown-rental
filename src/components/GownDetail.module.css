@@ -1,0 +1,206 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 8500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  background: #ffffff;
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  animation: slideUp 0.25s ease;
+  scrollbar-width: none;
+}
+.modal::-webkit-scrollbar { display: none; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.close:hover { background: #333; }
+
+/* Left — image */
+.imgWrap {
+  background: #f5f5f5;
+  overflow: hidden;
+  min-height: 480px;
+}
+.imgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+/* Right — info */
+.info {
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cat {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.4);
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.name {
+  font-family: 'The Seasons', Georgia, serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #0a0a0a;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+/* Rental details */
+.details {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.details li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+}
+.details li span {
+  color: rgba(0,0,0,0.5);
+  font-weight: 500;
+}
+.details li strong {
+  color: #0a0a0a;
+  font-weight: 700;
+}
+
+/* AR section */
+.arWrap {
+  background: #0a0a0a;
+  padding: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.arLabel {
+  font-family: 'The Seasons', Georgia, serif;
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.arSub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.arBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #0a0a0a;
+  border: none;
+  padding: 10px 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: fit-content;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 4px;
+}
+.arBtn:hover { background: rgba(255,255,255,0.85); }
+
+.arBadge {
+  background: rgba(0,0,0,0.1);
+  color: rgba(0,0,0,0.5);
+  font-size: 9px;
+  letter-spacing: 1px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Visit button */
+.visitBtn {
+  width: 100%;
+  padding: 13px;
+  background: transparent;
+  border: 1px solid #0a0a0a;
+  color: #0a0a0a;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.visitBtn:hover {
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .modal { grid-template-columns: 1fr; }
+  .imgWrap { min-height: 280px; }
+  .info { padding: 28px 24px; }
+  .name { font-size: 22px; }
+}

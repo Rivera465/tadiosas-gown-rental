@@ -1,0 +1,147 @@
+.footer {
+  background: #0a0a0a;
+  color: #fff;
+  padding: 56px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.inner {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ── Brand column ── */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.logo {
+  height: 36px;
+  object-fit: contain;
+  object-position: left;
+}
+
+.tagline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.45);
+  max-width: 260px;
+}
+
+.socials {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.socials a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+
+.socials a:hover {
+  color: #fff;
+}
+
+/* ── Link columns ── */
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.colTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 600;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.col ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.col ul li {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
+
+.col ul li button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s;
+}
+
+.col ul li button:hover {
+  color: #fff;
+}
+
+.col p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+}
+
+/* ── Bottom bar ── */
+.bottom {
+  width: 100%;
+  margin: 48px 0 0;
+  padding: 18px 48px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.bottom p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.5px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 0 32px;
+  }
+  .bottom { padding: 18px 32px; }
+}
+
+@media (max-width: 560px) {
+  .footer { padding: 40px 0 0; }
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 0 20px;
+  }
+  .bottom { padding: 16px 20px; margin-top: 32px; }
+  .logo { height: 28px; }
+}

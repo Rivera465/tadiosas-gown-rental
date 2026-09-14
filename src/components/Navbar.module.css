@@ -1,0 +1,98 @@
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 64px;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  animation: fadeDown 0.7s ease forwards;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  flex: 1;
+  padding: 0;
+  margin: 0;
+}
+
+.right {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.links a {
+  color: #0a0a0a;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+
+.links a:hover { opacity: 0.45; }
+
+.logoWrap {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 38px;
+  object-fit: contain;
+}
+
+.enquire {
+  background: none;
+  border: 1px solid #0a0a0a !important;
+  padding: 6px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s !important;
+}
+
+.enquire:hover {
+  background: #0a0a0a !important;
+  color: #fff !important;
+  opacity: 1 !important;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #0a0a0a;
+}
+
+@media (max-width: 768px) {
+  .nav { padding: 0 20px; }
+  .left { display: none; }
+  .hamburger { display: flex; }
+  .right { gap: 14px; }
+}

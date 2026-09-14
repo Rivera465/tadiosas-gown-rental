@@ -1,0 +1,104 @@
+.section {
+  background: #f8f6f3;
+  color: #0a0a0a;
+  padding: 80px 60px;
+  animation: fadeInUp 0.5s ease both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.back {
+  align-self: flex-start;
+  background: none;
+  border: 1px solid #0a0a0a;
+  color: #0a0a0a;
+  padding: 8px 18px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background 0.2s, color 0.2s;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+.back:hover { background: #0a0a0a; color: #fff; }
+
+.title {
+  font-family: 'The Seasons', Georgia, serif;
+  font-size: 34px;
+  letter-spacing: 2px;
+}
+
+.sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #888;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  outline: none;
+}
+.card:hover, .card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.14);
+}
+
+.imgWrap {
+  overflow: hidden;
+  height: 320px;
+  position: relative;
+}
+.imgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform 0.4s;
+}
+.card:hover .imgWrap img { transform: scale(1.05); }
+
+.info { padding: 14px 16px; }
+.info h3 {
+  font-family: 'The Seasons', Georgia, serif;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.info p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .section { padding: 60px 20px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+  .imgWrap { height: 220px; }
+}

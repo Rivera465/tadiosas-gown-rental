@@ -1,0 +1,53 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  background: #0a0a0a;
+  color: #ffffff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Titles use The Seasons */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'The Seasons', Georgia, serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+button {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ── Transparent scrollbar ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 999px;
+}
+
+*:hover::-webkit-scrollbar-thumb {
+  background: rgba(128,128,128,0.25);
+}
