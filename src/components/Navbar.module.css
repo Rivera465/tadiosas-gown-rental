@@ -35,7 +35,8 @@
   color: #0a0a0a;
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 13px;
+  font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   transition: opacity 0.2s;
@@ -57,9 +58,10 @@
 .enquire {
   background: none;
   border: 1px solid #0a0a0a !important;
-  padding: 6px 16px;
+  padding: 7px 18px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 13px;
+  font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #0a0a0a;

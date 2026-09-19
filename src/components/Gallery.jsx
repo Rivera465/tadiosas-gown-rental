@@ -6,7 +6,7 @@ import styles from './Gallery.module.css';
 export default function Gallery() {
   const [lightbox, setLightbox] = useState({ open: false, index: 0 });
 
-  const openLb  = useCallback((idx) => setLightbox({ open: true, index: idx }), []);
+  const openLb = useCallback((idx) => setLightbox({ open: true, index: idx }), []);
   const closeLb = useCallback(() => setLightbox(lb => ({ ...lb, open: false })), []);
   const prevLb  = useCallback(() =>
     setLightbox(lb => ({ ...lb, index: (lb.index - 1 + galleryImages.length) % galleryImages.length }))
@@ -17,7 +17,10 @@ export default function Gallery() {
 
   return (
     <section className={styles.section} id="gallery">
-      {/* 3-column uniform square grid — matching the Figma screenshot */}
+      <div className={styles.heading}>
+        <span className={styles.eyebrow}>Our Work</span>
+        <h2 className={styles.title}>Gallery</h2>
+      </div>
       <div className={styles.grid}>
         {galleryImages.map((src, idx) => (
           <div

@@ -53,7 +53,7 @@
 
 .eyebrow {
   font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: rgba(0,0,0,0.6);
@@ -95,7 +95,7 @@
 
 .infoLabel {
   font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
   font-weight: 700;
@@ -119,7 +119,7 @@
 
 .socialLink {
   font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #0a0a0a;

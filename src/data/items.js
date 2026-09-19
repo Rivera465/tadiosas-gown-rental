@@ -20,7 +20,6 @@ export const allItems = [
 ];
 
 export const galleryImages = [
-  '/for home and event page.jpg',
   '/for collection.jpg',
   '/for collection1.jpg',
   '/for collection2.jpg',
@@ -29,15 +28,22 @@ export const galleryImages = [
   '/for collection5.jpg',
   '/for collection6.jpg',
   '/for collection7.jpg',
-  '/for collection8.jpg',
-  '/for collection9.jpg',
   '/for collection10.jpg',
   '/for collection11.jpg',
   '/for collection12.jpg',
-  '/for collection13.jpg',
-  '/for collection14.jpg',
   '/for collection15.jpg',
   '/for collection16.jpg',
+  '/for collection17.jpg',
+  '/for collection18.jpg',
+  '/for collection19.jpg',
+  '/for collection20.jpg',
+  '/for collection21.jpg',
+  '/for collection22.jpg',
+  '/for collection23.jpg',
+  '/for collection24.jpg',
+  '/for collection8.jpg',
+  '/for collection9.jpg',
+  '/for collection13.jpg',
 ];
 
 /* Event → recommended dress categories */

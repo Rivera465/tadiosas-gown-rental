@@ -1,25 +1,48 @@
 .section {
-  background: #ffffff;
-  padding-top: 64px; /* offset for fixed navbar */
+  background: #0a0a0a;
+  padding-top: 64px;
   padding-bottom: 80px;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 
-/* 3-column uniform grid with tight gaps — matches Figma screenshot */
+/* Section title */
+.heading {
+  text-align: left;
+  margin-bottom: 36px;
+}
+
+.eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.title {
+  font-family: 'The Seasons', Georgia, serif;
+  font-size: 48px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* 6 columns — smaller images, less crowded */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
-  background: #e0e0e0; /* gap colour shows between cells */
-  max-width: 960px;
-  margin: 0 auto;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  width: 100%;
 }
 
 .cell {
-  position: relative;
-  overflow: hidden;   /* clips the zoomed image to the cell boundary */
-  cursor: pointer;
   aspect-ratio: 1 / 1;
-  background: #f0f0f0;
+  overflow: hidden;
+  cursor: pointer;
+  background: #111;
   outline: none;
 }
 
@@ -27,18 +50,29 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
   display: block;
-  /* Once hover: zoom little bit. Same picture — smooth scale, nothing else changes */
-  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.4s ease, filter 0.3s ease;
+  filter: brightness(0.88);
 }
 
-/* Hover/focus: zoom in slightly — same image, no overlay, no colour shift */
 .cell:hover img,
 .cell:focus-visible img {
-  transform: scale(1.07);
+  transform: scale(1.06);
+  filter: brightness(1);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(5, 1fr); }
 }
 
 @media (max-width: 768px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
+  .grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .section { padding-left: 20px; padding-right: 20px; }
+  .title { font-size: 28px; }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
 }
