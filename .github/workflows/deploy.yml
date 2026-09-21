@@ -1,0 +1,54 @@
+name: Deploy Customer Website
+
+on:
+  push:
+    branches:
+      - master  # → production (Vercel auto-deploys)
+      - dev     # → staging preview (Vercel auto-deploys)
+
+jobs:
+  build:
+    name: Build Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_API_URL: https://smartrent-admin-itelect4-api-production.up.railway.app/api/v1
+
+  health-check:
+    name: Health Check (Production)
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Wait for Vercel deployment
+        run: sleep 60
+
+      - name: Check customer website (with retries)
+        run: |
+          for i in 1 2 3 4 5; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://tadiosas-gown-rental.vercel.app)
+            echo "Attempt $i: HTTP $STATUS"
+            if [ "$STATUS" = "200" ]; then
+              echo "Customer website health check passed (HTTP $STATUS)"
+              exit 0
+            fi
+            sleep 30
+          done
+          echo "Health check failed after 5 attempts"
+          exit 1
