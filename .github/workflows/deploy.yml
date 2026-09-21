@@ -42,7 +42,7 @@ jobs:
       - name: Check customer website (with retries)
         run: |
           for i in 1 2 3 4 5; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://tadiosas-gown-rental.vercel.app)
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://tadiosas-gown-rental.vercel.app/)
             echo "Attempt $i: HTTP $STATUS"
             if [ "$STATUS" = "200" ]; then
               echo "Customer website health check passed (HTTP $STATUS)"
