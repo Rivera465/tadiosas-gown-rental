@@ -11,33 +11,9 @@ const eventTypes = [
 export default function Events({ activeEvent, onEventSelect }) {
   return (
     <>
-      {/* Events section title block — reduced top spacing */}
-      <div id="events" style={{
-        background: '#0a0a0a',
-        padding: '44px 60px 0 60px',
-        textAlign: 'left',
-      }}>
-        <span style={{
-          fontFamily: "'Montserrat', sans-serif",
-          fontSize: '12px',
-          letterSpacing: '3px',
-          textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.4)',
-          display: 'block',
-          marginBottom: '8px',
-          fontWeight: '600',
-        }}>
-          Find Your Style
-        </span>
-        <h2 style={{
-          fontFamily: "'The Seasons', Georgia, serif",
-          fontSize: '48px',
-          fontWeight: '600',
-          color: '#ffffff',
-          marginBottom: '0',
-        }}>
-          Events
-        </h2>
+      <div id="events" className={styles.titleBlock}>
+        <span className={styles.eyebrow}>Find Your Style</span>
+        <h2 className={styles.sectionTitle}>Events</h2>
       </div>
 
       <section className={styles.section}>

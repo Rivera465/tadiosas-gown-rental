@@ -198,9 +198,27 @@
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+  .modal { max-width: 680px; }
+}
+
+@media (max-width: 1024px) {
+  .modal { max-width: 95vw; padding: 36px 32px 44px; }
+}
+
 @media (max-width: 640px) {
-  .modal { grid-template-columns: 1fr; }
-  .imgWrap { min-height: 280px; }
-  .info { padding: 28px 24px; }
+  .modal { grid-template-columns: 1fr; max-width: 100%; margin: 10px; }
+  .imgWrap { min-height: 260px; max-height: 45vw; }
+  .info { padding: 24px 20px; gap: 0; }
   .name { font-size: 22px; }
+  .details { gap: 8px; }
+  .arWrap { padding: 16px; }
+}
+
+@media (max-width: 480px) {
+  .imgWrap { min-height: 200px; }
+  .name { font-size: 20px; }
+  .cat { font-size: 9px; }
+  .arBtn { font-size: 11px; padding: 8px 14px; }
+  .visitBtn { font-size: 11px; padding: 11px; }
 }

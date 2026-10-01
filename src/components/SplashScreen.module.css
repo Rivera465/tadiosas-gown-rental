@@ -116,3 +116,12 @@
   opacity: 1;
   transform: translateX(0);
 }
+
+@media (max-width: 600px) {
+  .faceFrame { width: clamp(60px, 14vw, 100px); }
+  .wordmark {
+    width: clamp(120px, 42vw, 220px);
+    margin-left: calc(-1 * clamp(120px, 42vw, 220px) / 2 - 3vw);
+  }
+  .stage.slide .faceFrame { transform: translateX(20vw); }
+}

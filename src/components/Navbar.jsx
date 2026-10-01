@@ -3,8 +3,8 @@ import ContactModal from './ContactModal';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
-  const [menuOpen,      setMenuOpen]      = useState(false);
-  const [contactOpen,   setContactOpen]   = useState(false);
+  const [menuOpen,    setMenuOpen]    = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
 
   const handleNav = (e, href) => {
     e.preventDefault();
@@ -52,6 +52,19 @@ export default function Navbar() {
           <span /><span /><span />
         </button>
       </nav>
+
+      {/* Mobile full-screen menu */}
+      <div className={`${styles.mobileMenu} ${menuOpen ? styles.open : ''}`}>
+        <a href="#home"    onClick={e => handleNav(e, '#home')}>Home</a>
+        <a href="#gallery" onClick={e => handleNav(e, '#gallery')}>Gallery</a>
+        <a href="#events"  onClick={e => handleNav(e, '#events')}>Events</a>
+        <button
+          className={styles.mobileVisitBtn}
+          onClick={() => { setMenuOpen(false); setContactOpen(true); }}
+        >
+          Visit Us
+        </button>
+      </div>
 
       {contactOpen && <ContactModal onClose={() => setContactOpen(false)} />}
     </>

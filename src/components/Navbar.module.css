@@ -75,6 +75,7 @@
   opacity: 1 !important;
 }
 
+/* ── Hamburger ── */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -83,18 +84,90 @@
   border: none;
   cursor: pointer;
   padding: 4px;
+  z-index: 200;
 }
 
 .hamburger span {
   display: block;
-  width: 22px;
+  width: 24px;
   height: 2px;
   background: #0a0a0a;
+  transition: transform 0.3s, opacity 0.3s;
 }
 
-@media (max-width: 768px) {
+/* ── Compact dropdown menu (NOT full screen) ── */
+.mobileMenu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  z-index: 99;
+  flex-direction: column;
+  padding: 8px 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  /* Hidden by default */
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.mobileMenu.open {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobileMenu a,
+.mobileMenu button {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #0a0a0a;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 14px 24px;
+  text-align: left;
+  width: 100%;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background 0.15s;
+}
+
+.mobileMenu a:last-child,
+.mobileMenu button:last-child {
+  border-bottom: none;
+}
+
+.mobileMenu a:hover,
+.mobileMenu button:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.mobileVisitBtn {
+  color: #0a0a0a !important;
+  font-weight: 700 !important;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .nav { padding: 0 28px; }
+  .links { gap: 20px; }
+  .links a { font-size: 12px; }
+  .enquire { font-size: 12px; padding: 6px 14px; }
+}
+
+/* ── Mobile only (phones) ── */
+@media (max-width: 640px) {
   .nav { padding: 0 20px; }
   .left { display: none; }
+  .right { display: none; }
   .hamburger { display: flex; }
-  .right { gap: 14px; }
 }
