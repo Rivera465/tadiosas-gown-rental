@@ -21,11 +21,9 @@ export default function GownDetail({ item, onClose }) {
           <div className={styles.divider} />
 
           <ul className={styles.details}>
-            <li><span>Rental Period</span><strong>3 Days</strong></li>
-            <li><span>Pick Up</span><strong>1pm – 10pm</strong></li>
-            <li><span>Return</span><strong>8am – 3pm</strong></li>
-            <li><span>Late Fee</span><strong>₱200 / day</strong></li>
-            <li><span>Down Payment</span><strong>₱500 min.</strong></li>
+            <li><span>Price</span><strong>₱1,000</strong></li>
+            <li><span>Availability</span><strong className={styles.available}>Available</strong></li>
+            <li><span>Size</span><strong>XS – L</strong></li>
           </ul>
 
           <div className={styles.divider} />

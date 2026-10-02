@@ -121,6 +121,11 @@
   font-weight: 700;
 }
 
+.available {
+  color: #1a7a3c !important;
+  font-weight: 700;
+}
+
 /* AR section */
 .arWrap {
   background: #0a0a0a;

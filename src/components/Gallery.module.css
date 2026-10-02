@@ -53,8 +53,8 @@
 
 /* Row speeds */
 .row1 .track { animation: scrollLeft 40s linear infinite; }
-.row2 .track { animation: scrollRight 27s linear infinite; }
-.row3 .track { animation: scrollLeft 20s linear infinite; }
+.row2 .track { animation: scrollRight 40s linear infinite; }
+.row3 .track { animation: scrollLeft 45s linear infinite; }
 .row:hover .track { animation-play-state: paused; }
 
 @keyframes scrollLeft {
