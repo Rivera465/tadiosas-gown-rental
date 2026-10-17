@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { prewarmCatalog } from '../hooks/useCatalog';
+import { loadSiteImagesOnce } from '../hooks/useSiteImages';
 import styles from './SplashScreen.module.css';
 
 export default function SplashScreen({ onDone }) {
@@ -8,6 +10,12 @@ export default function SplashScreen({ onDone }) {
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
+
+    // Put the splash's ~5s animation to work: preload the catalog + primary
+    // thumbnails in the background so the first page the user reaches is instant
+    // (no spinner / image pop-in). Fire-and-forget — never blocks the splash.
+    prewarmCatalog();
+    loadSiteImagesOnce(); // warm the hero/events/gallery images too
 
     const t = (fn, ms) => {
       const id = setTimeout(fn, ms);

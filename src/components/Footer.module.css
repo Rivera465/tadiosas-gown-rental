@@ -43,16 +43,17 @@
 }
 
 .socials a {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
-  color: rgba(255,255,255,0.5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
-  letter-spacing: 0.5px;
-  transition: color 0.2s;
+  transition: color 0.2s ease, transform 0.15s ease;
 }
 
 .socials a:hover {
   color: #fff;
+  transform: translateY(-2px);
 }
 
 /* ── Link columns ── */
