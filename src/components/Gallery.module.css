@@ -3,13 +3,19 @@
   padding-top: 0;
   padding-bottom: 32px;
   overflow: hidden;
+  /* When the "Gallery" nav link jumps here, land just below the 64px fixed
+     navbar with a little breathing room (not a huge gap). */
+  scroll-margin-top: 72px;
 }
 
 /* ── Title ── */
 .heading {
   text-align: left;
   margin-bottom: 20px;
-  padding: 76px 0 0 60px;
+  /* Small top padding only — the big empty gap above the Gallery is gone.
+     Navbar clearance on the "Gallery" jump is handled by the section's
+     scroll-margin-top (72px), so the heading itself just needs breathing room. */
+  padding: 32px 0 0 60px;
 }
 
 .eyebrow {
@@ -51,11 +57,53 @@
   align-items: stretch;
 }
 
-/* Row speeds */
+/* Row speeds — higher duration = slower.
+   The MIDDLE row (row2) moves the OPPOSITE direction to rows 1 & 3, which makes
+   it *look* faster than the outer rows even at an equal duration (relative-motion
+   optical effect). It's also a taller/different-width row, so its pixels-per-sec
+   differed. We give row2 a noticeably longer duration (55s vs 40/45s) so it reads
+   as the calmest of the three and no longer appears to zip through the middle. */
 .row1 .track { animation: scrollLeft 40s linear infinite; }
-.row2 .track { animation: scrollRight 40s linear infinite; }
+.row2 .track { animation: scrollRight 55s linear infinite; }
 .row3 .track { animation: scrollLeft 45s linear infinite; }
 .row:hover .track { animation-play-state: paused; }
+
+/* Explicit pause (via the play/pause button) — freezes all three rows. */
+.paused .track { animation-play-state: paused !important; }
+
+/* ── Play / pause control (Apple-style, bottom-right under the carousel) ── */
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  padding: 14px 60px 0;
+}
+
+.playPause {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+.playPause:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.playPause:active { transform: scale(0.92); }
+.playPause:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1024px) { .controls { padding: 12px 40px 0; } }
+@media (max-width: 820px)  { .controls { padding: 12px 24px 0; } }
+@media (max-width: 640px)  { .controls { padding: 10px 20px 0; } }
 
 @keyframes scrollLeft {
   0%   { transform: translateX(0); }
@@ -130,7 +178,7 @@
   .row2 .card { height: 165px; }
   .row2 .portrait { width: 124px; }
   .title { font-size: 36px; }
-  .heading { padding: 76px 0 0 40px; }
+  .heading { padding: 28px 0 0 40px; }
   .section { padding-bottom: 24px; }
 }
 
@@ -141,7 +189,7 @@
   .row2 .card { height: 142px; }
   .row2 .portrait { width: 106px; }
   .title { font-size: 30px; }
-  .heading { padding: 76px 0 0 24px; }
+  .heading { padding: 24px 0 0 24px; }
   .carouselWrap { gap: 8px; }
   .section { padding-bottom: 20px; }
 }
@@ -152,7 +200,7 @@
   .landscape { width: 180px; }
   .row2 .card { height: 130px; }
   .row2 .portrait { width: 97px; }
-  .heading { padding: 76px 0 0 20px; }
+  .heading { padding: 24px 0 0 20px; }
   .title { font-size: 26px; }
   .carouselWrap { gap: 7px; }
   .section { padding-bottom: 16px; }

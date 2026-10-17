@@ -46,31 +46,9 @@ export const galleryImages = [
   '/for collection13.jpg',
 ];
 
-/* Event → recommended dress categories */
-export const eventMap = {
-  birthday: {
-    label: 'Birthday',
-    sub:   'Gowns · Dresses · Ball Gowns',
-    cats:  ['Gown', 'Dress', 'Ball Gown'],
-  },
-  wedding: {
-    label: 'Wedding Guest',
-    sub:   'Gowns · Alampay · Bolero',
-    cats:  ['Gown', 'Alampay', 'Bolero'],
-  },
-  ball: {
-    label: 'Ball / Party',
-    sub:   'Ball Gowns · Gowns · Premium Tuxedo',
-    cats:  ['Ball Gown', 'Gown', 'Premium Tuxedo'],
-  },
-  special: {
-    label: 'Special Occasion',
-    sub:   'Gowns · Dresses · Barong',
-    cats:  ['Gown', 'Dress', 'Barong'],
-  },
-  school: {
-    label: 'School Event',
-    sub:   'Dresses · Barong · Bolero',
-    cats:  ['Dress', 'Barong', 'Bolero'],
-  },
-};
+/*
+ * NOTE: the old `eventMap` (hardcoded event-type → category lists) was removed.
+ * The website now browses by LIVE categories fetched from SmartRent
+ * (GET /public/categories, via useCategories), so there is no hardcoded
+ * event/category mapping to keep in sync.
+ */

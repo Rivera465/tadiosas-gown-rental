@@ -45,16 +45,6 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
       </button>
 
       <p className={styles.counter}>{index + 1} / {images.length}</p>
-
-      {/* AR TRY-ON PLACEHOLDER — replace onClick with real AR logic */}
-      <button
-        className={styles.arBtn}
-        onClick={e => { e.stopPropagation(); /* TODO: launch AR try-on */ }}
-        aria-label="Try on in AR"
-        title="AR Try-On coming soon"
-      >
-        ⬡&nbsp; Try On AR
-      </button>
     </div>
   );
 }

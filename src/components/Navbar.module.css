@@ -1,11 +1,18 @@
 .nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  /* Use an explicit width instead of right:0. The fadeDown animation leaves a
+     residual `transform` on this fixed element, which in some browsers makes
+     `right: 0` compute against a scrollbar-inset box — leaving a thin gap on the
+     right. `width: 100%` resolves to the full viewport width and is immune to
+     that, so the bar reaches both walls. */
+  width: 100%;
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 28px;
   height: 64px;
   background: #ffffff;
   border-bottom: 1px solid rgba(0,0,0,0.08);
@@ -21,11 +28,13 @@
   list-style: none;
   display: flex;
   gap: 28px;
-  flex: 1;
+  align-items: center;
   padding: 0;
   margin: 0;
 }
 
+/* All links grouped on the right; the logo (the nav's other flex child) sits on
+   the left via the nav's justify-content: space-between. */
 .right {
   justify-content: flex-end;
   align-items: center;
@@ -167,7 +176,7 @@
 /* ── Mobile only (phones) ── */
 @media (max-width: 640px) {
   .nav { padding: 0 20px; }
-  .left { display: none; }
+  /* Logo stays left; the right link group is replaced by the hamburger. */
   .right { display: none; }
   .hamburger { display: flex; }
 }
