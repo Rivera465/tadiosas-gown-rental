@@ -40,9 +40,11 @@ export default function GownDetail({ item, onClose }) {
 
   // AR: use the uploaded overlay URL if available, otherwise fall back to the
   // item's own image (local items without an uploaded overlay).
-  const overlayUrl = item.arOverlayUrl || (item.img && item.img.startsWith('http')
-    ? item.img
-    : item.img ? `${window.location.origin}${item.img}` : null);
+  const overlayUrl = item.arOverlayUrl || item.arOverlay
+    ? (item.arOverlayUrl || item.arOverlay).startsWith('http')
+      ? (item.arOverlayUrl || item.arOverlay)
+      : `${window.location.origin}${item.arOverlayUrl || item.arOverlay}`
+    : null;
 
   const fit = item.arFitType || FIT_TYPE_MAP[item.cat] || 'full';
 
