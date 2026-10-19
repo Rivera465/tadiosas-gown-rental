@@ -23,7 +23,6 @@
 
 import { useEffect, useState } from 'react';
 import { fetchPublicItems } from '../api/catalog';
-import { allItems as hardcodedItems } from '../data/items';
 
 /**
  * Maps one public DTO item to the UI item shape.
@@ -68,14 +67,11 @@ function loadCatalogOnce() {
     try {
       const data = await fetchPublicItems({ limit: 100 });
       const list = Array.isArray(data?.items) ? data.items : [];
-      result = list.length === 0
-        // API reachable but empty → hardcoded so the page isn't blank.
-        ? { items: hardcodedItems, source: 'fallback', error: null }
-        : { items: list.map(mapDtoToItem), source: 'api', error: null };
+      result = { items: list.map(mapDtoToItem), source: 'api', error: null };
     } catch (err) {
-      // Network/API failure → graceful fallback to the bundled list.
+      // Network/API failure → empty list so nothing stale shows.
       result = {
-        items: hardcodedItems,
+        items: [],
         source: 'fallback',
         error: err?.message || 'Failed to load the live catalog.',
       };
@@ -152,12 +148,11 @@ export function prewarmCatalog() {
       for (const item of result.items) {
         const url = item?.img || (Array.isArray(item?.images) ? item.images[0] : null);
         if (url) {
-          // Creating an Image and setting src kicks off a cached download.
           const pre = new Image();
           pre.decoding = 'async';
           pre.src = url;
         }
       }
     })
-    .catch(() => { /* best-effort — never block the splash */ });
+    .catch(() => { /* best-effort */ });
 }
