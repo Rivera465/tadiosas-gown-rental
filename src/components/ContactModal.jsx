@@ -1,3 +1,4 @@
+import SocialIcons from './SocialIcons';
 import styles from './ContactModal.module.css';
 
 export default function ContactModal({ onClose }) {
@@ -43,17 +44,8 @@ export default function ContactModal({ onClose }) {
               <span className={styles.infoIcon}>📱</span>
               <div>
                 <p className={styles.infoLabel}>Follow Us</p>
-                <div className={styles.socials}>
-                  <a href="https://www.facebook.com/share/1DSg8i2BoY/" target="_blank" rel="noreferrer" className={styles.socialLink}>
-                    Facebook
-                  </a>
-                  <a href="https://www.instagram.com/tadiosagown" target="_blank" rel="noreferrer" className={styles.socialLink}>
-                    Instagram
-                  </a>
-                  <a href="https://www.tiktok.com/@tadiosasgownrental" target="_blank" rel="noreferrer" className={styles.socialLink}>
-                    TikTok
-                  </a>
-                </div>
+                <SocialIcons className={styles.socials} itemClassName={styles.socialLink} />
+
               </div>
             </div>
           </div>

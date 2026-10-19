@@ -4,6 +4,13 @@
   padding: 0;
 }
 
+/* Explicitly zero the body margin too — the browser's default 8px body margin
+   is what was pushing the whole page (navbar included) in from the screen
+   edges, so the fixed topbar never touched the left/right walls. */
+html, body {
+  margin: 0;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -29,25 +36,56 @@ button {
   font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* ── Transparent scrollbar ── */
-* {
+/* ── Scrollbar (Apple-style: always visible, subtle) ─────────────────────────
+   The PAGE scrollbar lives in a reserved gutter on the right. Previously the
+   thumb/track were transparent (only showing on hover), so that gutter looked
+   like an unexplained empty strip beside the fixed navbar. We now give the main
+   page scrollbar a subtle, always-visible thumb + faint track so the gutter
+   reads as an intentional scrollbar (like Apple's site) rather than dead space.
+   `scrollbar-gutter: stable` reserves the gutter consistently to avoid layout
+   shift when content height changes. */
+html {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.28) rgba(255, 255, 255, 0.06);
+}
+
+/* WebKit (Chrome/Edge/Safari) — the page scrollbar. */
+html::-webkit-scrollbar {
+  width: 10px;
+}
+html::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+html::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  /* Inset the thumb slightly within the track for a pill look. */
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+  background-clip: content-box;
+}
+
+/* Inner scroll areas (modals, panels) keep a slim, hover-reveal scrollbar so
+   they don't get a heavy bar — only the main page gutter is the visible one. */
+*:not(html) {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 }
-
-*::-webkit-scrollbar {
+*:not(html)::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
-
-*::-webkit-scrollbar-track {
+*:not(html)::-webkit-scrollbar-track {
   background: transparent;
 }
-
-*::-webkit-scrollbar-thumb {
+*:not(html)::-webkit-scrollbar-thumb {
   background: transparent;
   border-radius: 999px;
 }
-
-*:hover::-webkit-scrollbar-thumb {
-  background: rgba(128,128,128,0.25);
+*:not(html):hover::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.25);
 }

@@ -7,15 +7,31 @@ import Events        from './components/Events';
 import EventDresses  from './components/EventDresses';
 import Footer        from './components/Footer';
 
-export default function App() {
-  const [splashDone,  setSplashDone]  = useState(false);
-  const [activeEvent, setActiveEvent] = useState(null);
+/**
+ * Session flag so the splash screen plays only ONCE per browser session (like
+ * Facebook's intro). Navigating to /collection and back unmounts/remounts App,
+ * which would otherwise replay the splash every time. sessionStorage survives
+ * in-app navigation but resets on a new tab / hard refresh — which is the
+ * desired "fresh visit shows splash" behaviour.
+ */
+const SPLASH_SEEN_KEY = 'tadiosa_splash_seen_v1';
 
-  const handleSplashDone  = useCallback(() => setSplashDone(true), []);
-  const handleEventSelect = useCallback((key) => setActiveEvent(key), []);
+export default function App() {
+  // Start already-done if the splash has played this session → no replay on
+  // return from another route.
+  const [splashDone, setSplashDone] = useState(
+    () => typeof sessionStorage !== 'undefined' && sessionStorage.getItem(SPLASH_SEEN_KEY) === '1',
+  );
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  const handleSplashDone = useCallback(() => {
+    try { sessionStorage.setItem(SPLASH_SEEN_KEY, '1'); } catch { /* ignore */ }
+    setSplashDone(true);
+  }, []);
+  const handleCategorySelect = useCallback((name) => setActiveCategory(name), []);
 
   const handleBack = useCallback(() => {
-    setActiveEvent(null);
+    setActiveCategory(null);
     setTimeout(() => {
       const el = document.querySelector('#events');
       if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' });
@@ -30,10 +46,10 @@ export default function App() {
         <Navbar />
         <Hero />
         <Gallery />
-        <Events activeEvent={activeEvent} onEventSelect={handleEventSelect} />
+        <Events activeCategory={activeCategory} onCategorySelect={handleCategorySelect} />
 
-        {activeEvent && (
-          <EventDresses eventKey={activeEvent} onBack={handleBack} />
+        {activeCategory && (
+          <EventDresses category={activeCategory} onBack={handleBack} />
         )}
 
         <Footer />

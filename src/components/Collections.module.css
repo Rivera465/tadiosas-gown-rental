@@ -94,8 +94,24 @@
   color: #888;
 }
 
+@media (max-width: 1024px) {
+  .section { padding: 70px 32px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .imgWrap { height: 280px; }
+  .title { font-size: 30px; }
+}
+
 @media (max-width: 768px) {
-  .section { padding: 60px 20px; }
+  .section { padding: 52px 20px; }
   .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
   .imgWrap { height: 220px; }
+  .title { font-size: 24px; }
+  .tab { font-size: 11px; padding: 7px 14px; }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 40px 14px; }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .imgWrap { height: 180px; }
+  .title { font-size: 20px; }
 }

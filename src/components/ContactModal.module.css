@@ -118,25 +118,32 @@
 }
 
 .socialLink {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
   color: #0a0a0a;
   text-decoration: none;
-  border: 1px solid rgba(0,0,0,0.2);
-  padding: 7px 16px;
-  transition: background 0.2s, color 0.2s;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
 }
 .socialLink:hover {
   background: #0a0a0a;
   color: #ffffff;
+  border-color: #0a0a0a;
+  transform: translateY(-2px);
 }
 
 .mapWrap {
   height: 340px;
   overflow: hidden;
   border: 1px solid rgba(0,0,0,0.1);
+}
+
+@media (max-width: 1024px) {
+  .modal { max-width: 95vw; padding: 36px 32px 44px; }
 }
 
 @media (max-width: 680px) {

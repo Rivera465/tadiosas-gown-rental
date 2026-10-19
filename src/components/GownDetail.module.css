@@ -14,11 +14,13 @@
 .modal {
   background: #ffffff;
   width: 100%;
-  max-width: 780px;
+  max-width: 820px;
   max-height: 90vh;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* Image column gets the lion's share; the info side only holds a few lines,
+     so it's narrower (less wasted white space). */
+  grid-template-columns: 1.45fr 1fr;
   position: relative;
   animation: slideUp 0.25s ease;
   scrollbar-width: none;
@@ -48,25 +50,33 @@
 }
 .close:hover { background: #333; }
 
-/* Left — image */
+/* Left — image. Shows the FULL uploaded image (no crop) via object-fit:contain,
+   centered on a neutral backdrop. The whole photo — including any text/branding
+   baked into it — is always visible, matching how SmartRent's inventory shows
+   the full image. */
 .imgWrap {
-  background: #f5f5f5;
+  background: #f2f1ee;
   overflow: hidden;
-  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 540px;
 }
 .imgWrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top;
+  object-fit: contain;
+  object-position: center;
   display: block;
 }
 
-/* Right — info */
+/* Right — info. Narrow column + centered content so the few lines don't leave
+   a big empty white block; vertically centered against the taller image. */
 .info {
-  padding: 40px 36px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 0;
 }
 
@@ -118,6 +128,11 @@
 }
 .details li strong {
   color: #0a0a0a;
+  font-weight: 700;
+}
+
+.available {
+  color: #1a7a3c !important;
   font-weight: 700;
 }
 
@@ -177,30 +192,40 @@
   text-transform: uppercase;
 }
 
-/* Visit button */
-.visitBtn {
-  width: 100%;
-  padding: 13px;
-  background: transparent;
-  border: 1px solid #0a0a0a;
-  color: #0a0a0a;
+/* Visit note — plain helper text (replaces the old reserve button) */
+.visitNote {
+  margin: 14px 0 0;
   font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-.visitBtn:hover {
-  background: #0a0a0a;
-  color: #ffffff;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.55);
+  text-align: center;
+  letter-spacing: 0.3px;
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .modal { max-width: 92vw; }
+}
+
+@media (max-width: 900px) {
+  .modal { max-width: 90vw; }
+}
+
 @media (max-width: 640px) {
-  .modal { grid-template-columns: 1fr; }
-  .imgWrap { min-height: 280px; }
-  .info { padding: 28px 24px; }
+  .modal { grid-template-columns: 1fr; max-width: 100%; margin: 10px; }
+  /* Stacked layout: image on top, shown fully (contain) up to a sensible height
+     so the portrait photo isn't cut and the info still fits below. */
+  .imgWrap { min-height: 50vh; max-height: 60vh; }
+  .info { padding: 24px 20px; justify-content: flex-start; gap: 0; }
   .name { font-size: 22px; }
+  .details { gap: 8px; }
+  .arWrap { padding: 16px; }
+}
+
+@media (max-width: 480px) {
+  .imgWrap { min-height: 42vh; }
+  .name { font-size: 20px; }
+  .cat { font-size: 9px; }
+  .arBtn { font-size: 11px; padding: 8px 14px; }
+  .visitNote { font-size: 11px; }
 }

@@ -1,8 +1,16 @@
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import styles from './GownDetail.module.css';
+import { buildArPreviewUrl } from '../api/arPreview';
+import { imgFallback, ITEM_IMAGE_PLACEHOLDER } from '../utils/imgFallback';
 
-const AR_APP_URL = import.meta.env.VITE_AR_APP_URL || 'https://smartrent-ar-itelect.vercel.app';
+/** Formats a numeric peso price, or a friendly fallback when unknown. */
+function formatPrice(price) {
+  if (price == null || Number.isNaN(Number(price))) return 'Ask in store';
+  return `₱${Number(price).toLocaleString('en-PH')}`;
+}
 
-// Map tadiosa category names to AR fit types
+// Map tadiosa category names to AR fit types (fallback for local items)
 const FIT_TYPE_MAP = {
   'Gown':           'full',
   'Ball Gown':      'ball',
@@ -14,19 +22,44 @@ const FIT_TYPE_MAP = {
 };
 
 export default function GownDetail({ item, onClose }) {
-  const handleArTryOn = () => {
-    const fit  = FIT_TYPE_MAP[item.cat] || 'full';
-    const name = encodeURIComponent(item.name);
+  // Freeze the page behind the modal + close on Escape. Both restored on unmount.
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
 
-    // Build the absolute overlay URL from the item's image path
-    const overlayUrl = item.img.startsWith('http')
-      ? item.img
-      : `${window.location.origin}${item.img}`;
+    function onKey(e) {
+      if (e.key === 'Escape') onClose();
+    }
+    document.addEventListener('keydown', onKey);
 
-    const arUrl = `${AR_APP_URL}?overlayUrl=${encodeURIComponent(overlayUrl)}&fit=${fit}&name=${name}`;
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [onClose]);
+
+  // AR: use the uploaded overlay URL if available, otherwise fall back to the
+  // item's own image (local items without an uploaded overlay).
+  const overlayUrl = item.arOverlayUrl || (item.img && item.img.startsWith('http')
+    ? item.img
+    : item.img ? `${window.location.origin}${item.img}` : null);
+
+  const fit = item.arFitType || FIT_TYPE_MAP[item.cat] || 'full';
+
+  const arUrl = overlayUrl
+    ? buildArPreviewUrl({ overlayUrl, fit, name: item.name })
+    : null;
+
+  // Availability: live items carry a boolean; fallback items have none → treat
+  // as available (the marketing site shouldn't scare customers off).
+  const isAvailable = item.available !== false;
+
+  function handleTryOn() {
+    if (!arUrl) return;
     window.open(arUrl, '_blank', 'noopener,noreferrer');
-  };
-  return (
+  }
+
+  return createPortal(
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={e => e.stopPropagation()}>
 
@@ -35,7 +68,7 @@ export default function GownDetail({ item, onClose }) {
 
         {/* Image */}
         <div className={styles.imgWrap}>
-          <img src={item.img} alt={item.name} />
+          <img src={item.img || ITEM_IMAGE_PLACEHOLDER} alt={item.name} onError={imgFallback(ITEM_IMAGE_PLACEHOLDER)} />
         </div>
 
         {/* Info */}
@@ -46,34 +79,43 @@ export default function GownDetail({ item, onClose }) {
           <div className={styles.divider} />
 
           <ul className={styles.details}>
-            <li><span>Rental Period</span><strong>3 Days</strong></li>
-            <li><span>Pick Up</span><strong>1pm – 10pm</strong></li>
-            <li><span>Return</span><strong>8am – 3pm</strong></li>
-            <li><span>Late Fee</span><strong>₱200 / day</strong></li>
-            <li><span>Down Payment</span><strong>₱500 min.</strong></li>
+            <li><span>Price</span><strong>{formatPrice(item.price)}</strong></li>
+            <li>
+              <span>Availability</span>
+              <strong className={isAvailable ? styles.available : undefined}>
+                {isAvailable ? 'Available' : 'Currently Unavailable'}
+              </strong>
+            </li>
+            {item.size && <li><span>Size</span><strong>{item.size}</strong></li>}
           </ul>
 
           <div className={styles.divider} />
 
           {/* AR Try-On */}
-          <div className={styles.arWrap}>
-            <p className={styles.arLabel}>Virtual Try-On</p>
-            <p className={styles.arSub}>See how this gown looks on you using your camera.</p>
-            <button
-              className={styles.arBtn}
-              onClick={handleArTryOn}
-              aria-label="Try on in AR"
-            >
-              <span>⬡</span> Try On AR
-            </button>
-          </div>
+          {arUrl ? (
+            <div className={styles.arWrap}>
+              <p className={styles.arLabel}>Virtual Try-On</p>
+              <p className={styles.arSub}>See how this looks on you using your camera.</p>
+              <button
+                className={styles.arBtn}
+                onClick={handleTryOn}
+                aria-label={`Try on ${item.name} using your camera`}
+              >
+                <span>⬡</span> Try Me
+              </button>
+            </div>
+          ) : (
+            <div className={styles.arWrap}>
+              <p className={styles.arLabel}>Virtual Try-On</p>
+              <p className={styles.arSub}>Not yet available for this item.</p>
+            </div>
+          )}
 
-          <button className={styles.visitBtn} onClick={onClose}>
-            Visit Us to Reserve
-          </button>
+          <p className={styles.visitNote}>Visit us in-store to reserve this item.</p>
         </div>
 
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

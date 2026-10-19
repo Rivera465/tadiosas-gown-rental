@@ -43,16 +43,17 @@
 }
 
 .socials a {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
-  color: rgba(255,255,255,0.5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
-  letter-spacing: 0.5px;
-  transition: color 0.2s;
+  transition: color 0.2s ease, transform 0.15s ease;
 }
 
 .socials a:hover {
   color: #fff;
+  transform: translateY(-2px);
 }
 
 /* ── Link columns ── */
@@ -126,22 +127,21 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 900px) {
-  .inner {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    padding: 0 32px;
-  }
+@media (max-width: 1024px) {
+  .inner { grid-template-columns: 2fr 1fr 1fr; gap: 28px; padding: 0 32px; }
   .bottom { padding: 18px 32px; }
+}
+
+@media (max-width: 900px) {
+  .inner { grid-template-columns: 1fr 1fr; gap: 28px; padding: 0 24px; }
+  .bottom { padding: 18px 24px; }
 }
 
 @media (max-width: 560px) {
   .footer { padding: 40px 0 0; }
-  .inner {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 0 20px;
-  }
-  .bottom { padding: 16px 20px; margin-top: 32px; }
+  .inner { grid-template-columns: 1fr; gap: 24px; padding: 0 20px; }
+  .bottom { padding: 16px 20px; margin-top: 28px; }
   .logo { height: 28px; }
+  .colTitle { font-size: 11px; }
+  .col ul li, .col ul li button, .col p { font-size: 13px; }
 }
